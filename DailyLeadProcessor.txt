@@ -1,0 +1,13 @@
+global class DailyLeadProcessor implements Schedulable{
+    global void execute(SchedulableContext sc){
+        List<Lead> lstofLead = [SELECT Id FROM Lead WHERE Leadsource = null LIMIT 200];
+        List<Lead> lstofupdatedLead=new List<Lead>();
+        if(!lstofLead.isEmpty()){
+           for (Lead ld:lstofLead){
+                 ld.Leadsource='Dreamforce';
+                 lstofupdatedLead.add(ld);
+           }
+            UPDATE lstofupdatedLead;
+           }
+        }
+    }
